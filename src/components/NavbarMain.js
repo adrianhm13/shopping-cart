@@ -2,14 +2,13 @@ import { NavLink } from "react-router-dom";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
-import NavDropdown from "react-bootstrap/NavDropdown"
 
 export default function NavbarMain() {
   return (
     <div>
       <Navbar bg="light" expand="lg" className="py-4" >
         <Container>
-          <Navbar.Brand href="/">GameShop</Navbar.Brand>
+          <NavLink exact to="/"className="navbar-brand" >MinimFurn</NavLink>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse className="justify-content-end" id="basic-navbar-nav">
             <Nav className="gap-3" >
