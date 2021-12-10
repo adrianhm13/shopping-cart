@@ -59,7 +59,7 @@ export default function Shop() {
           <Col className="bg-light border rounded" xs={8} md={2}>
             <NavbarCategories onCategory={handleCategory} />
           </Col>
-          <Col>
+          <Col className="border rounded p-3">
             {error && <p className="error">{error}</p>}
             {data && <ShopList data={data} />}
           </Col>

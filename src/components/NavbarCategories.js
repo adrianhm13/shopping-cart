@@ -3,11 +3,24 @@ import { Link } from "react-router-dom";
 export default function NavbarCategories({ onCategory }) {
   return (
     <div>
-      <div className="my-4">
+      <div className="mt-5">
         <h6>Categories</h6>
       </div>
-      <div>
-        <Nav variant="pills" className="flex-column">
+      <hr />
+      <div className="mb-3">
+        <Nav variant="pills" defaultActiveKey="link-0" className="flex-column">
+          <Nav.Item>
+            <Nav.Link
+              as={Link}
+              to="/shop"
+              eventKey="link-0"
+              onClick={() => {
+                onCategory("");
+              }}
+            >
+              All products
+            </Nav.Link>
+          </Nav.Item>
           <Nav.Item>
             <Nav.Link
               as={Link}
