@@ -6,7 +6,7 @@ import Navbar from "react-bootstrap/Navbar";
 export default function NavbarMain() {
   return (
     <div>
-      <Navbar bg="light" expand="lg" className="py-4" >
+      <Navbar bg="light" expand="lg" className="py-4 border-bottom" >
         <Container>
           <NavLink exact to="/"className="navbar-brand" >MinimFurn</NavLink>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
