@@ -10,7 +10,6 @@ import NavbarCategories from "../../components/NavbarCategories";
 
 export default function Shop() {
   const [data, setData] = useState(null);
-  const [isPending, setIsPending] = useState(false);
   const [error, setError] = useState(false);
 
   const [category, setCategory] = useState("");
@@ -20,7 +19,6 @@ export default function Shop() {
   };
 
   useEffect(() => {
-    setIsPending(true);
 
     let query = projectFirestore.collection("products");
 
@@ -34,21 +32,18 @@ export default function Shop() {
         if (snapshot.empty) {
           setError("We are out of items right now!");
           setData([]);
-          setIsPending(false);
         } else {
           let results = [];
           snapshot.docs.forEach((doc) => {
             results.push({ id: doc.id, ...doc.data() });
           });
-          setError(null);
+          setError(false);
           setData(results);
-          setIsPending(false);
           console.log("Use Effect Shop", data);
         }
       })
       .catch((error) => {
         setError(error.message);
-        setIsPending(false);
       });
   }, [category]);
 

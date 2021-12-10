@@ -4,7 +4,7 @@ export default function NavbarCategories({ onCategory }) {
   return (
     <div>
       <div className="mt-5">
-        <h6>Categories</h6>
+        <h6 className="display-6">Categories</h6>
       </div>
       <hr />
       <div className="mb-3">

@@ -1,5 +1,4 @@
 import Card from "react-bootstrap/Card";
-import Button from "react-bootstrap/Button";
 import { Link } from "react-router-dom";
 import Container from "react-bootstrap/esm/Container";
 
@@ -16,13 +15,10 @@ export default function ShopList({ data: items }) {
                 <Card.Text>{item.desc.substring(0, 100)}...</Card.Text>
                 <div className="d-flex flex-row justify-content-center align-items-center gap-3">
                 <Card.Subtitle>{item.price} $</Card.Subtitle>
-                <Link to={`/kitchen/${item.id}`}>
-                  <Button className="my-2" variant="primary">
-                    More details
-                  </Button>
+                <Link to={`/products/${item.id}`} role="button" className="btn btn-outline-primary">
+                  More info
                 </Link>
                 </div>
-
               </Card.Body>
             </Card>
         ))}
