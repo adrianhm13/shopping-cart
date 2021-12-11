@@ -11,7 +11,7 @@ export default function NavbarMain() {
     <div>
       <Navbar bg="light" expand="lg" className="py-4 border-bottom">
         <Container>
-          <NavLink exact to="/home" className="navbar-brand">
+          <NavLink exact to="/" className="navbar-brand">
             MinimFurn
           </NavLink>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -20,7 +20,7 @@ export default function NavbarMain() {
             id="basic-navbar-nav"
           >
             <Nav className="gap-3">
-              <NavLink exact to="/home" className="nav-link">
+              <NavLink exact to="/" className="nav-link">
                 Home
               </NavLink>
               <NavLink exact to="/shop" className="nav-link">
