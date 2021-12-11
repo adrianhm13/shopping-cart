@@ -17,11 +17,16 @@ import ShippingIcon from "../../assets/shipping.svg";
 export default function Item() {
   const [item, setItem] = useState(null);
   const [error, setError] = useState(false);
+  const [addedCart, setAddedCart] = useState(false);
 
   const { id } = useParams();
 
-  const {addItem} = useContext(CartContext)
+  const { addItem, listItems } = useContext(CartContext);
 
+  const handleAdd = () => {
+    addItem(item, id);
+    setAddedCart(true);
+  };
   useEffect(() => {
     projectFirestore
       .collection("products")
@@ -36,6 +41,13 @@ export default function Item() {
         }
       });
   }, [id]);
+
+  useEffect(() => {
+    console.log('SOME fnct')
+    if(listItems.some((item) => item.id === id)){
+      setAddedCart(true)
+    };
+  }, [listItems, id]);
 
   return (
     <Container className="mt-4">
@@ -62,7 +74,19 @@ export default function Item() {
                   <h6 className="display-6">{item.price} $</h6>
                 </Col>
                 <Col xs="12" lg="5">
-                  <Button variant="outline-primary" onClick={() => addItem(item)}>Add to cart</Button>
+                  {!addedCart && (
+                    <Button
+                      variant="outline-primary"
+                      onClick={() => handleAdd()}
+                    >
+                      Add to cart
+                    </Button>
+                  )}
+                  {addedCart && (
+                    <Button disabled variant="outline-primary">
+                      Added
+                    </Button>
+                  )}
                 </Col>
               </Row>
             </Container>

@@ -13,8 +13,8 @@ import { ReactComponent as Cart } from "../assets/cart.svg";
 
 
 export default function ShoppingCart() {
-  const { listItems } = useContext(CartContext);
-
+  const { listItems, total } = useContext(CartContext);
+  console.log(listItems)
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
@@ -42,7 +42,7 @@ export default function ShoppingCart() {
         <Offcanvas.Body>
           {listItems &&
             listItems.map((item) => (
-              <Container>
+              <Container key={item.id}>
                   <Row className="justify-content-center align-items-center">
                 <Col lg="3">
                   <p className="leash">
@@ -52,13 +52,15 @@ export default function ShoppingCart() {
                 <Col lg="9">
                   <Container className="d-flex flex-row gap-3">
                     <Button className="btn btn-danger">-1</Button>
-                    <Button disabled>0</Button>
-                    <Button className="btn btn-success">+1</Button>
+                    <Button disabled>{item.qty}</Button>
+                    <Button className="btn btn-secondary">+1</Button>
                   </Container>
                 </Col>
                 </Row>
+                <hr></hr>
               </Container>
             ))}
+            <h5 className="display-5 text-center">Total: {total} $</h5>
         </Offcanvas.Body>
       </Offcanvas>
     </>

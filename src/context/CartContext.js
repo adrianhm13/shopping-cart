@@ -1,20 +1,31 @@
-import { createContext, useState } from "react";
+import { createContext, useReducer } from "react";
 
 export const CartContext = createContext();
 
-export function CartProvider({ children }) {
-  const [listItems, setListItems] = useState([
-    { title: "Tata deciratuve", price: 500},
-    { title: "Decorative", price: 500},
-  ]);
+const cartReducer = (state, action) => {
+  switch (action.type) {
+    case "ADD_ITEM":
+      return { ...state, listItems: [...state.listItems, action.payload] };
+    default:
+      return state;
+  }
+};
 
-  const addItem = ({id, title, price}) => {
-    setListItems([...listItems, { id: id, title: title, price: price }]);
+export function CartProvider({ children }) {
+  const [state, dispatch] = useReducer(cartReducer, {
+    total: 0,
+    listItems: [],
+  });
+
+  const addItem = ({ title, price }, id) => {
+    if (!state.listItems.some((item) => item.id === id)) {
+      const newItem = { id: id, title: title, price: price, qty: 1 };
+      dispatch({ type: "ADD_ITEM", payload: newItem });
+    }
   };
 
-
   return (
-    <CartContext.Provider value={{listItems, addItem }}>
+    <CartContext.Provider value={{ ...state, addItem }}>
       {children}
     </CartContext.Provider>
   );
