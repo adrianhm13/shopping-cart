@@ -8,6 +8,7 @@ import Badge from "react-bootstrap/Badge";
 import Container from "react-bootstrap/esm/Container";
 import Col from "react-bootstrap/esm/Col";
 import Row from "react-bootstrap/esm/Row";
+import Image from "react-bootstrap/Image";
 // Icons
 import { ReactComponent as Cart } from "../assets/cart.svg";
 
@@ -41,37 +42,49 @@ export default function ShoppingCart() {
           <Offcanvas.Title>Shopping Cart</Offcanvas.Title>
         </Offcanvas.Header>
         <Offcanvas.Body>
+          <h5 className="display-6 text-center my-5">Total: ${total}.00 </h5>
+          <hr></hr>
           {listItems &&
             listItems.map((item) => (
               <Container key={item.id}>
                 <Row className="justify-content-center align-items-center">
-                  <Col lg="5" xs="4">
-                    <p className="leash m-0">{item.title}</p>
+                  <Col lg="5" xs="5">
+                    <Image src={item.pic} fluid thumbnail></Image>
                   </Col>
-                  <Col lg="7" xs="8">
-                    <Container className="d-flex flex-row gap-2">
-                      <Button
-                        className="btn btn-danger"
-                        size="sm"
-                        onClick={() => decreaseQty(item.id)}
-                      >
-                        -1
-                      </Button>
-                      <Button disabled size="sm">{item.qty}</Button>
-                      <Button
-                        className="btn btn-secondary"
-                        size="sm"
-                        onClick={() => increaseQty(item.id)}
-                      >
-                        +1
-                      </Button>
+                  <Col lg="7" xs="7">
+                    <Container className="d-flex flex-column justify-content-center align-items-center gap-3">
+                      <p className="leash m-0">{item.title}</p>
+                      <p className="leash m-0">$ {item.price}.00</p>
+                      <Container className="d-flex flex-row gap-2 justify-content-center">
+                        <Button
+                          className="btn btn-danger"
+                          size="sm"
+                          onClick={() => decreaseQty(item.id)}
+                        >
+                          -1
+                        </Button>
+                        <Button disabled size="sm">
+                          {item.qty}
+                        </Button>
+                        <Button
+                          className="btn btn-secondary"
+                          size="sm"
+                          onClick={() => increaseQty(item.id)}
+                        >
+                          +1
+                        </Button>
+                      </Container>
                     </Container>
                   </Col>
                 </Row>
                 <hr></hr>
               </Container>
             ))}
-          <h5 className="display-5 text-center">Total: {total} $</h5>
+          <Container className="d-flex align-items-center justify-content-center">
+            <Button variant="secondary" size="lg">
+              Checkout
+            </Button>
+          </Container>
         </Offcanvas.Body>
       </Offcanvas>
     </>

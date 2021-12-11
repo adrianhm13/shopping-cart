@@ -14,7 +14,7 @@ export default function ShopList({ data: items }) {
               <Card.Body>
                 <Card.Text>{item.desc.substring(0, 100)}...</Card.Text>
                 <div className="d-flex flex-row justify-content-center align-items-center gap-3">
-                <Card.Subtitle>{item.price} $</Card.Subtitle>
+                <Card.Subtitle>$ {item.price}.00</Card.Subtitle>
                 <Link to={`/products/${item.id}`} role="button" className="btn btn-outline-primary">
                   More info
                 </Link>

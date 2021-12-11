@@ -25,8 +25,8 @@ export function CartProvider({ children }) {
     listItems: [],
   });
 
-  const addItem = ({ title, price }, id) => {
-    const newItem = { id: id, title: title, price: price, qty: 1 };
+  const addItem = ({ title, price, pic }, id) => {
+    const newItem = { id: id, title: title, price: price, qty: 1, pic: pic };
     dispatch({ type: "ADD_ITEM", payload: newItem });
   };
 
@@ -36,6 +36,7 @@ export function CartProvider({ children }) {
       if (item.id === id) {
         item.qty = item.qty + 1;
       }
+      return true;
     });
     dispatch({ type: "INCREASE_QTY", payload: updatedListItems });
   };
@@ -45,6 +46,7 @@ export function CartProvider({ children }) {
       if (item.id === id) {
         item.qty = item.qty - 1;
       }
+      return true;
     });
     dispatch({ type: "DECREASE_QTY", payload: updatedListItems });
   };

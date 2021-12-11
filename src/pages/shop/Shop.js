@@ -44,6 +44,7 @@ export default function Shop() {
       .catch((error) => {
         setError(error.message);
       });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [category]);
 
   return (
