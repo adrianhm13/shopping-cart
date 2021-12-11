@@ -14,16 +14,13 @@ import { ReactComponent as Cart } from "../assets/cart.svg";
 export default function ShoppingCart() {
   const { listItems, total, increaseQty, decreaseQty } =
     useContext(CartContext);
+
   const [show, setShow] = useState(false);
 
+  // Modal offscreen
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  const handleDecrease = ({ id, qty }) => {
-    if (qty !== 0) {
-      decreaseQty(id);
-    }
-  };
   return (
     <>
       <div className="position-relative">
@@ -48,20 +45,22 @@ export default function ShoppingCart() {
             listItems.map((item) => (
               <Container key={item.id}>
                 <Row className="justify-content-center align-items-center">
-                  <Col lg="3">
-                    <p className="leash">{item.title}</p>
+                  <Col lg="5" xs="4">
+                    <p className="leash m-0">{item.title}</p>
                   </Col>
-                  <Col lg="9">
-                    <Container className="d-flex flex-row gap-3">
+                  <Col lg="7" xs="8">
+                    <Container className="d-flex flex-row gap-2">
                       <Button
                         className="btn btn-danger"
-                        onClick={() => handleDecrease(item)}
+                        size="sm"
+                        onClick={() => decreaseQty(item.id)}
                       >
                         -1
                       </Button>
-                      <Button disabled>{item.qty}</Button>
+                      <Button disabled size="sm">{item.qty}</Button>
                       <Button
                         className="btn btn-secondary"
+                        size="sm"
                         onClick={() => increaseQty(item.id)}
                       >
                         +1

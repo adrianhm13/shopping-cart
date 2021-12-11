@@ -18,12 +18,11 @@ export default function Shop() {
     setCategory(category);
   };
 
+  //Fetching products for products list
   useEffect(() => {
-
     let query = projectFirestore.collection("products");
 
     if (category) {
-      // If there is no category, first click in shop, will show all the items
       query = query.where("category", "==", category);
     }
     query
@@ -48,9 +47,12 @@ export default function Shop() {
   }, [category]);
 
   return (
-    <div className="shop" style={{ minHeight: "800px"}}>
+    <div className="shop" style={{ minHeight: "800px" }}>
       <Container className="my-3" style={{ minHeight: "800px" }}>
-        <Row className="gap-2 justify-content-center"style={{ minHeight: "800px" }}>
+        <Row
+          className="gap-2 justify-content-center"
+          style={{ minHeight: "800px" }}
+        >
           <Col className="bg-light border rounded" xs={8} md={2}>
             <NavbarCategories onCategory={handleCategory} />
           </Col>

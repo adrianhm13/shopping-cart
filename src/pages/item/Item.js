@@ -27,6 +27,8 @@ export default function Item() {
     addItem(item, id);
     setAddedCart(true);
   };
+
+  // Fetching single product
   useEffect(() => {
     projectFirestore
       .collection("products")
@@ -42,8 +44,8 @@ export default function Item() {
       });
   }, [id]);
 
+  // If item it's deleted from cart, button will be enabled again
   useEffect(() => {
-    console.log('SOME fnct')
     if(listItems.some((item) => item.id === id)){
       setAddedCart(true)
     }else{
