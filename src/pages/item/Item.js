@@ -46,8 +46,10 @@ export default function Item() {
     console.log('SOME fnct')
     if(listItems.some((item) => item.id === id)){
       setAddedCart(true)
-    };
-  }, [listItems, id]);
+    }else{
+      setAddedCart(false)
+    }
+  }, [id, listItems]);
 
   return (
     <Container className="mt-4">

@@ -11,15 +11,19 @@ import Row from "react-bootstrap/esm/Row";
 // Icons
 import { ReactComponent as Cart } from "../assets/cart.svg";
 
-
 export default function ShoppingCart() {
-  const { listItems, total } = useContext(CartContext);
-  console.log(listItems)
+  const { listItems, total, increaseQty, decreaseQty } =
+    useContext(CartContext);
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+  const handleDecrease = ({ id, qty }) => {
+    if (qty !== 0) {
+      decreaseQty(id);
+    }
+  };
   return (
     <>
       <div className="position-relative">
@@ -43,24 +47,32 @@ export default function ShoppingCart() {
           {listItems &&
             listItems.map((item) => (
               <Container key={item.id}>
-                  <Row className="justify-content-center align-items-center">
-                <Col lg="3">
-                  <p className="leash">
-                    {item.title}
-                  </p>
-                </Col>
-                <Col lg="9">
-                  <Container className="d-flex flex-row gap-3">
-                    <Button className="btn btn-danger">-1</Button>
-                    <Button disabled>{item.qty}</Button>
-                    <Button className="btn btn-secondary">+1</Button>
-                  </Container>
-                </Col>
+                <Row className="justify-content-center align-items-center">
+                  <Col lg="3">
+                    <p className="leash">{item.title}</p>
+                  </Col>
+                  <Col lg="9">
+                    <Container className="d-flex flex-row gap-3">
+                      <Button
+                        className="btn btn-danger"
+                        onClick={() => handleDecrease(item)}
+                      >
+                        -1
+                      </Button>
+                      <Button disabled>{item.qty}</Button>
+                      <Button
+                        className="btn btn-secondary"
+                        onClick={() => increaseQty(item.id)}
+                      >
+                        +1
+                      </Button>
+                    </Container>
+                  </Col>
                 </Row>
                 <hr></hr>
               </Container>
             ))}
-            <h5 className="display-5 text-center">Total: {total} $</h5>
+          <h5 className="display-5 text-center">Total: {total} $</h5>
         </Offcanvas.Body>
       </Offcanvas>
     </>
